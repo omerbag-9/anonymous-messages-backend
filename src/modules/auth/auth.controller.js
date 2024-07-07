@@ -34,3 +34,18 @@ export const signup = async(req,res,next)=>{
  sendEmail(email,token)
  return res.status(201).json({message:'user created successfully',success:true,data:createdUser})
 }
+
+// sign in
+export const signIn = async (req,res,next)=>{
+    const {email,password} = req.body
+    const userExist = await User.findOne({email})
+    if(!userExist){
+        next(new AppError('invalid credentials'),401)
+    }
+    const isPassword = bcrypt.compareSync(password,userExist.password)
+    if(!isPassword){
+        next(new AppError('invalid credentials'),401)
+    }
+    const accessToken = jwt.sign({email},'Key')
+    return res.status(200).json({message:'logged successfully',success:true,accessToken})
+}
