@@ -46,6 +46,6 @@ export const signIn = async (req,res,next)=>{
     if(!isPassword){
         next(new AppError('invalid credentials'),401)
     }
-    const accessToken = jwt.sign({email},'Key')
+    const accessToken = jwt.sign({userId:userExist._id,email},'Key')
     return res.status(200).json({message:'logged successfully',success:true,accessToken})
 }

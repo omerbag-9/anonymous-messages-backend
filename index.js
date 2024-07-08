@@ -5,6 +5,7 @@ import { globalHandler } from './src/utils/asyncHandler.js'
 import { authRouter } from './src/modules/auth/auth.router.js'
 import jwt from 'jsonwebtoken'
 import { User } from './db/models/user.model.js'
+import { messageRouter } from './src/modules/message/message.router.js'
 
 // create server
 const app = express()
@@ -21,6 +22,7 @@ app.use(express.json())
 // routers
 
 app.use('/auth',authRouter)
+app.use('/message',messageRouter)
 
 // sendemail router
 
