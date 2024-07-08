@@ -19,6 +19,9 @@ export const addMessage = async (req,res,next)=>{
 export const getMessages = async (req,res,next)=>{
     const {userId} = req.user 
     const getUserMessage = await Message.find({recieverId:userId})
+    if(getUserMessage.length === 0){
+    return res.status(201).json({message:"user don't have messages yet",success:true})
+    }
     return res.status(201).json({data:getUserMessage,success:true})
 }
 
