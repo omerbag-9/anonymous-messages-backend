@@ -9,7 +9,7 @@ import { messageRouter } from './src/modules/message/message.router.js'
 
 // create server
 const app = express()
-const port = 3000
+const port = process.env.Port || 3000
 
 // connect to db
 
